@@ -5,8 +5,8 @@
 // Document root: ./www
 
 #define _POSIX_C_SOURCE 200809L
-#include <strings.h>   // for strcasecmp, strncasecmp
-#include <ctype.h>     // for isxdigit
+#include <strings.h>   
+#include <ctype.h>     
 #include <arpa/inet.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -39,7 +39,6 @@ void handle_sigint(int signum) {
     running = false;
 }
 
-// Utility: write all bytes
 ssize_t write_all(int fd, const void *buf, size_t count) {
     size_t left = count;
     const char *p = buf;
@@ -55,7 +54,7 @@ ssize_t write_all(int fd, const void *buf, size_t count) {
     return (ssize_t)count;
 }
 
-// Map file extension to Content-Type
+
 const char *get_mime_type(const char *path) {
     const char *ext = strrchr(path, '.');
     if (!ext) return "application/octet-stream";
@@ -70,7 +69,6 @@ const char *get_mime_type(const char *path) {
     return "application/octet-stream";
 }
 
-// URL-decode (simple)
 void url_decode(char *dst, const char *src) {
     char a, b;
     while (*src) {
