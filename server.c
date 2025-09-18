@@ -405,15 +405,12 @@ void *worker_thread(void *arg) {
                 // close socket after response or on error
                 break;
             } else {
-                // pr == 0 => keep alive, continue
-                // Remove consumed bytes from inbuf (there may be pipelined additional data)
+
                 if (consumed < inbuf_len) {
                     memmove(inbuf, inbuf + consumed, inbuf_len - consumed);
                     inbuf_len -= consumed;
-                    // do not reset timeout; continue loop to try parsing next request immediately
                     continue;
                 } else {
-                    // buffer empty; read new data with select+timeout (handled by top of loop)
                     inbuf_len = 0;
                     continue;
                 }
